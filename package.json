@@ -1,0 +1,20 @@
+{
+  "name": "preact-twitter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "nodemon": "nodemon --watch server/src/server.js server/src/server.js"
+  },
+  "keywords": [],
+  "author": "timausk <timausk@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.1.0",
+    "nodemon": "^2.0.4"
+  }
+}

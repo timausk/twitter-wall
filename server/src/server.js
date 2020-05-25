@@ -1,3 +1,6 @@
+import render from 'preact-render-to-string';
+import { html } from 'htm/preact'; // use preact binding
+
 const express = require('express');
 const compression = require('compression');
 
@@ -6,11 +9,12 @@ const port = 3000;
 
 app.use(compression());
 
+const body = render(html`<h1>Hello from Preact</h1>`);
 const layout =`
   <!DOCTYPE html>
   <html lang="en">
     <body>
-      <h1>Hello12</h1>
+      ${body}
     </body>
   </html>
 `;

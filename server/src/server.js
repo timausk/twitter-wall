@@ -1,5 +1,7 @@
 import render from 'preact-render-to-string';
 import { html } from 'htm/preact'; // use preact binding
+import App from './components/App';
+
 
 const express = require('express');
 const compression = require('compression');
@@ -9,7 +11,11 @@ const port = 3000;
 
 app.use(compression());
 
-const body = render(html`<h1>Hello from Preact</h1>`);
+const body = render(html`
+  <h1>Hello from Preact</h1>
+  <${App} />
+`);
+
 const layout =`
   <!DOCTYPE html>
   <html lang="en">

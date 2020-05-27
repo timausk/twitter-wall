@@ -1,6 +1,7 @@
 import render from 'preact-render-to-string';
 import { html } from 'htm/preact'; // use preact binding
 import App from './components/App';
+import Twit from './twit';
 
 const express = require('express');
 const compression = require('compression');

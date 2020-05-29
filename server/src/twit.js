@@ -10,13 +10,23 @@ let Twitter = new twit({
   strictSSL: true
 });
 
-Twitter.get('search/tweets', {
-  q: '#100DaysOfCode',
-  count: 10,
-  result_type: 'mixed'
-}).catch(function (err) {
-  console.log('caught error', err.stack);
-}).then(function (result) {
-  console.log('data', result.data);
-});
+function filterTweets (tweets) {
+  return tweets.map(tweet => ({
+    created_at: tweet.created_at,
+    user_name: tweet.user.name,
+    user_screen_name: tweet.user.screen_name,
+    tweet_text: tweet.text,
+    tweet_retweeted_status_text: tweet.retweeted_status
+      ? tweet.retweeted_status.text
+      : null,
+  }));
+}
 
+export default Object.assign({
+  async searchTweets(query, maxResults = 2) {
+    const url = 'search/tweets';
+    const params = {q: `${query}`, count: maxResults};
+    const result = await Twitter.get(url, params);
+    return filterTweets(result.data.statuses);
+  }
+});

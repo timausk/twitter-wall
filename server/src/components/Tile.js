@@ -1,14 +1,14 @@
 import { html } from 'htm/preact';
 
-const List = ({ data }) => {
+const Tile = ({ data }) => {
   return html`
     <!-- loop over tweets -->
     ${data.map(i => html`
       <div>
-        ${i}
+        ${i.tweet_text}
       </div>
     `)}
   `;
 };
 
-export default List;
+export default Tile;

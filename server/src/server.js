@@ -1,7 +1,7 @@
 import render from 'preact-render-to-string';
-import { html } from 'htm/preact'; // use preact binding
-import App from './components/App';
+import { html } from 'htm/preact';
 import Twit from './twit';
+import App from './components/App';
 
 const express = require('express');
 const compression = require('compression');
@@ -11,26 +11,31 @@ const port = 3000;
 
 app.use(compression());
 
-const body = render(html`
-  <h1>Hello from Preact</h1>
-  <div id="root">
-    <${App} />
-  </div>
-`);
+const initialSearchQuery = process.env.initial_search_query;
 
-const layout =`
+const HTMLShell = (body, headline) => `
   <!DOCTYPE html>
   <html lang="en">
     <body>
+      <h1>#${headline}</h1>
       ${body}
       <script type="module" src="client.js" async></script>
     </body>
   </html>
 `;
 
-app.get('/', (request, response) => {
-  response.send(layout);
-});
+Twit.searchTweets(initialSearchQuery, 4)
+  .then((tweets) => {
+    const body = render(html`
+    <div id="root">
+      <${App} data=${tweets} />
+    </div>
+  `);
+    app.get('/', (req, res) => res.send(HTMLShell(body, initialSearchQuery)));
+  })
+  .catch((error) => {
+    app.get('/', (req, res) => res.send(HTMLShell('sorry something went wrong: ' + error, initialSearchQuery)));
+  });
 
 app.get('/client.js', (request, response) => {
   response.sendFile('client.js', {

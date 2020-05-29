@@ -1,4 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
+import postcss from 'rollup-plugin-postcss';
 
 export default [
   {
@@ -16,6 +17,14 @@ export default [
       format: 'es', // ES Module format for modern browsers
       name: 'client',
     },
-    plugins: [resolve()],
-  },
+    plugins: [
+      resolve(),
+      postcss({
+        extract: 'main.css',
+        modules: true,
+        use: ['sass'],
+        minimize: true
+      })
+    ],
+  }
 ];

@@ -16,6 +16,10 @@ const initialSearchQuery = process.env.initial_search_query;
 const HTMLShell = (body, headline) => `
   <!DOCTYPE html>
   <html lang="en">
+    <head>
+        <title>Twitter Demo wall</title>
+        <link rel="stylesheet" href="main.css" >
+    </head>
     <body>
       <h1>#${headline}</h1>
       ${body}
@@ -42,7 +46,11 @@ app.get('/client.js', (request, response) => {
     root: __dirname, // build folder
   });
 });
-
+app.get('/main.css', (request, response) => {
+  response.sendFile('main.css', {
+    root: __dirname,
+  });
+});
 let server = app.listen(port, () => {
   console.log('Listening on port ' + server.address().port + '...');
 });

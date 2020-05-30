@@ -28,10 +28,10 @@ const HTMLShell = (body, headline) => `
   </html>
 `;
 
-Twit.searchTweets(initialSearchQuery, 4)
+Twit.searchTweets(initialSearchQuery, 14)
   .then((tweets) => {
     const body = render(html`
-    <div id="root">
+    <div id="js-root">
       <${App} data=${tweets} />
     </div>
   `);

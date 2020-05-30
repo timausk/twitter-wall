@@ -3,7 +3,9 @@ import Tile from './Tile';
 
 const App = ({data}) => {
   return html`
-    <${Tile} data=${data} />
+    <div id="js-grid" class="grid">
+        <${Tile} data=${data} />
+    </div>
   `;
 };
 

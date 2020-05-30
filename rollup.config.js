@@ -21,9 +21,9 @@ export default [
       resolve(),
       postcss({
         extract: 'main.css',
-        modules: true,
+        modules: false,
         use: ['sass'],
-        minimize: true
+        minimize: false
       })
     ],
   }

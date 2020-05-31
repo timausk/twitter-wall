@@ -17,24 +17,24 @@ const HTMLShell = (body, headline) => `
   <!DOCTYPE html>
   <html lang="en">
     <head>
-        <title>Twitter Demo wall</title>
+        <title>[Demo] Twitter-Wall</title>
         <link rel="stylesheet" href="main.css" >
     </head>
     <body>
-      <h1>#${headline}</h1>
-      ${body}
+      <div class="page">
+        <header><h1>#${headline}</h1></header>
+        <main>${body}</main>
+      </div>
       <script type="module" src="client.js" async></script>
     </body>
   </html>
 `;
 
-Twit.searchTweets(initialSearchQuery, 14)
+Twit.searchTweets(initialSearchQuery)
   .then((tweets) => {
     const body = render(html`
-    <div id="js-root">
       <${App} data=${tweets} />
-    </div>
-  `);
+    `);
     app.get('/', (req, res) => res.send(HTMLShell(body, initialSearchQuery)));
   })
   .catch((error) => {

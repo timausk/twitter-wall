@@ -1,10 +1,10 @@
 import { html } from 'htm/preact';
-import Tile from './Tile';
+import Tweet from './Tweet';
 
 const App = ({data}) => {
   return html`
     <div id="js-grid" class="grid">
-        <${Tile} data=${data} />
+        <${Tweet} data=${data} />
     </div>
   `;
 };

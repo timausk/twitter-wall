@@ -125,6 +125,11 @@ small {
     color: $twitter-grey-light;
   }
 
+  &__body {
+    text-decoration: none;
+    color: $twitter-black;
+  }
+
   &__footer {
     display: flex;
     align-items: center;

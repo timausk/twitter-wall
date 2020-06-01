@@ -1,6 +1,7 @@
 const twit = require('twit');
 const defaultAvatarSizes = 'normal';
 const availableAvatarSizes = ['mini', 'bigger', 'original'];
+const twitterUrl = 'https://twitter.com';
 
 require('dotenv').config();
 
@@ -18,10 +19,12 @@ const filterTweets = (tweets) => {
     created_at: formatDate(tweet.created_at),
     user_name: tweet.user.name,
     user_screen_name: tweet.user.screen_name,
+    user_profile_url: buildProfileUrl(tweet.user.screen_name),
     user_avatar: process.env.avatar_size
       ? getAlternativeAvatarSize(tweet.user.profile_image_url_https, process.env.avatar_size)
       : tweet.user.profile_image_url_https,
     tweet_text: tweet.text,
+    tweet_url: buildTweetUrl(tweet.user.screen_name, tweet.id_str),
     tweet_retweeted_status_text: tweet.retweeted_status
       ? tweet.retweeted_status.text
       : null,
@@ -39,6 +42,14 @@ const getAlternativeAvatarSize = (imageUrl, size) => {
   return (size === defaultAvatarSizes || ! availableAvatarSizes.includes(size))
     ? imageUrl
     : imageUrl.replace(defaultAvatarSizes, size);
+};
+
+const buildProfileUrl = (screenName) => {
+  return `${twitterUrl}/${screenName}`;
+};
+
+const buildTweetUrl = (screenName, statusId) => {
+  return `${twitterUrl}/${screenName}/status/${statusId}`;
 };
 
 export default Object.assign({

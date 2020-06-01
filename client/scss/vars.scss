@@ -1,0 +1,18 @@
+// Breakpoints
+$breakpoint-s: 568px;
+$breakpoint-l: 1920px;
+
+// Twitter colors
+$twitter-blue: #1da1f2;
+$twitter-black: #14171a;
+$twitter-grey-dark: #657786;
+$twitter-grey-light: #aab8c2;
+$twitter-grey-extra-light: #f5f8fa;
+
+// Layout
+$avatar-size: 48px;
+$avatar-size-large: 48px + (48px / 2);
+$grid-gap: 10px;
+$grid-gap-large: 20px;
+$grid-column-min-width: #{($breakpoint-s / 2) - (2 * $grid-gap)}; // at least 2 columns per row
+$grid-column-min-width-large: #{($breakpoint-l / 4) - (2 * $grid-gap-large)}; // at least 4 columns per row

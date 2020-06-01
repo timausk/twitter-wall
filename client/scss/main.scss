@@ -1,24 +1,15 @@
-/* - - - - - - VARS - - - - - - */
-$avatar-width: 48px;
-
-// Breakpoints
-$screen-xs: 376px;
-$screen-s: 735px;
-$screen-m: 1280px;
-$screen-l: 1920px;
-
-// TWITTER COLORS
-$twitter-blue: #1da1f2;
-$twitter-black: #14171a;
-$twitter-grey-dark: #657786;
-$twitter-grey-light: #aab8c2;
-$twitter-grey-extra-light: #f5f8fa;
+@import "vars";
+@import "mixin";
 
 html {
   box-sizing: border-box;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   font-size: 100%;
+
+  @include media('large-up') {
+    font-size: 175%;
+  }
 }
 
 *,
@@ -68,15 +59,28 @@ small {
 }
 
 .grid {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
-  grid-auto-rows: 20px;
+  @include media('small-only') {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include media('small-up') {
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: repeat(auto-fill, minmax($grid-column-min-width, 1fr));
+    grid-auto-rows: 20px;
+  }
+
+  @include media('large-up') {
+    grid-gap: $grid-gap-large;
+    grid-template-columns: repeat(auto-fill, minmax($grid-column-min-width-large, 1fr));
+  }
 }
 
 .tweet {
   $blockClass: &;
 
+  margin-bottom: 15px;
   padding: 15px;
   border: 1px solid $twitter-grey-light;
   border-radius: 3px;
@@ -93,9 +97,15 @@ small {
   }
 
   &__avatar {
-    width: $avatar-width;
-    height: $avatar-width;
-    flex: 0 0 $avatar-width;
+    width: $avatar-size;
+    height: $avatar-size;
+    flex: 0 0 $avatar-size;
+
+    @include media('large-up') {
+      width: $avatar-size-large;
+      height: $avatar-size-large;
+      flex: 0 0 $avatar-size-large;
+    }
     margin-right: 15px;
     border-radius: 50%;
   }

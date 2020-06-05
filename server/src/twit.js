@@ -3,13 +3,14 @@ const defaultAvatarSizes = 'normal';
 const availableAvatarSizes = ['mini', 'bigger', 'original'];
 const twitterUrl = 'https://twitter.com';
 
-require('dotenv').config();
+
+// todo test with missing consiúma key
 
 let Twitter = new twit({
-  consumer_key: process.env.consumer_key,
-  consumer_secret: process.env.consumer_secret,
-  access_token: process.env.access_token,
-  access_token_secret: process.env.access_token_secret,
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token: process.env.TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.TWITTER_TOKEN_SECRET,
   timeout_ms: 60 * 1000,
   strictSSL: true
 });
@@ -52,11 +53,13 @@ const buildTweetUrl = (screenName, statusId) => {
   return `${twitterUrl}/${screenName}/status/${statusId}`;
 };
 
-export default Object.assign({
-  async searchTweets(query, maxResults = 100) {
-    const url = 'search/tweets';
-    const params = {q: `${query}`, count: maxResults};
-    const result = await Twitter.get(url, params);
-    return filterTweets(result.data.statuses);
-  }
-});
+const searchTweets = async (query = 'porter stout', maxResults = 100) => {
+  const url = 'search/tweets';
+  const params = {q: `${query}`, count: maxResults};
+  const result = await Twitter.get(url, params);
+  return filterTweets(result.data.statuses);
+};
+
+module.exports = {
+  searchTweets
+};

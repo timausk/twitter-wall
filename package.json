@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "nodemon": "nodemon --watch build/server.js build/server.js",
+    "nodemon": "nodemon --watch server/src/server.js server/src/server.js",
     "rollup": "rollup --config --watch",
     "start": "npm-run-all --parallel nodemon rollup"
   },
@@ -12,12 +12,12 @@
   "author": "timausk <timausk@googlemail.com>",
   "license": "MIT",
   "dependencies": {
-    "compression": "^1.7.4",
+    "art-template": "^4.13.2",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "htm": "^3.0.4",
-    "preact": "^10.4.4",
-    "preact-render-to-string": "^5.1.8",
+    "fastify": "^3.0.0-rc.3",
+    "fastify-plugin": "^1.6.1",
+    "fastify-static": "^3.0.0",
+    "point-of-view": "^4.0.1",
     "twit": "^2.2.11"
   },
   "devDependencies": {

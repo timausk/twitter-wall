@@ -1,48 +1,30 @@
-import render from 'preact-render-to-string';
-import { html } from 'htm/preact';
-import Twit from './twit';
-import App from './components/App';
+require('dotenv').config();
 
-const express = require('express');
-const compression = require('compression');
+const path = require('path');
+const app = require('fastify')({logger: true});
+const port = process.env.PORT || 3000;
 
-const app = express();
-const port = 3000;
+app.register(require('fastify-static'), {
+  root: path.join(__dirname, '/../../', 'build'),
+  prefix: '/',
+});
 
-app.use(compression());
+app.register(require('point-of-view'), {
+  engine: {'art-template': require('art-template')}
+});
 
-const initialSearchQuery = process.env.initial_search_query;
+app.register(require('./routes'));
 
-const HTMLShell = (body, headline) => `
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <title>[Demo] Twitter-Wall</title>
-      <meta charset="utf-8">
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-      <div class="page">
-        <header><h1>#${headline}</h1></header>
-        <main>${body}</main>
-      </div>
-      <script type="module" src="client.js" async></script>
-    </body>
-  </html>
-`;
-
-Twit.searchTweets(initialSearchQuery)
-  .then((tweets) => {
-    const body = render(html`
-      <${App} data=${tweets} />
-    `);
-    app.get('/', (req, res) => res.send(HTMLShell(body, initialSearchQuery)));
-  })
-  .catch((error) => {
-    app.get('/', (req, res) => res.send(HTMLShell('sorry something went wrong: ' + error, initialSearchQuery)));
-  });
+const start = async () => {
+  try {
+    await app.listen(port);
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+};
+start();
+/*
 
 app.get('/client.js', (request, response) => {
   response.sendFile('client.js', {
@@ -54,6 +36,4 @@ app.get('/main.css', (request, response) => {
     root: __dirname,
   });
 });
-let server = app.listen(port, () => {
-  console.log('Listening on port ' + server.address().port + '...');
-});
+*/

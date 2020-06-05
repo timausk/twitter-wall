@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>[Demo] Twitter-Wall</title>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="page">
+	<header><h1>{{headline}}</h1></header>
+	<main>
+		<div id="js-grid" class="grid">
+		{{if tweets}}
+			{{include './tweet/tweet.art'}}
+		{{else if error}}
+			{{include './error/error.art'}}
+		{{/if}}
+		</div>
+	</main>
+</div>
+<script type="module" src="client.js" async></script>
+</body>
+</html>

@@ -11,7 +11,7 @@ import Utils from './utils.js';
     for (let item of gridItems) {
       let rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows')),
         rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
-        rowSpan = Math.ceil((item.firstChild.getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+        rowSpan = Math.ceil((item.firstElementChild.getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
       item.style.gridRowEnd = 'span ' + rowSpan;
     }
   };

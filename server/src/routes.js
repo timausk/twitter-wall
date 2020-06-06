@@ -6,7 +6,7 @@ async function routes (fastify, options) {
     if (result === null) {
       throw new Error('Invalid value');
     }
-    reply.view('./server/src/components/htmlShell.art', { headline: process.env.SEARCH_QUERY, tweets: result});
+    reply.view('htmlShell', { headline: process.env.SEARCH_QUERY, tweets: result});
     return reply;
   });
 }

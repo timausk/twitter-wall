@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon --watch server/src/server.js server/src/server.js",
-    "rollup": "rollup --config --watch",
-    "start": "npm-run-all --parallel nodemon rollup"
+    "rollup": "rollup -c -w",
+    "start": "npm-run-all --parallel nodemon rollup",
+    "buildProduction": "rollup -c --environment BUILD:production"
   },
   "keywords": [],
   "author": "timausk <timausk@googlemail.com>",
@@ -27,6 +28,7 @@
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
     "rollup": "^2.10.9",
-    "rollup-plugin-postcss": "^3.1.1"
+    "rollup-plugin-postcss": "^3.1.1",
+    "rollup-plugin-terser": "^6.1.0"
   }
 }

@@ -10,7 +10,13 @@ app.register(require('fastify-static'), {
 });
 
 app.register(require('point-of-view'), {
-  engine: {'art-template': require('art-template')}
+  engine: {'art-template': require('art-template')},
+  root: path.join(__dirname, 'components'),
+  viewExt: 'art',
+  defaultContext: {
+    dev: process.env.NODE_ENV === 'development'
+  },
+  options: {}
 });
 
 app.register(require('./routes'));
@@ -24,16 +30,3 @@ const start = async () => {
   }
 };
 start();
-/*
-
-app.get('/client.js', (request, response) => {
-  response.sendFile('client.js', {
-    root: __dirname, // build folder
-  });
-});
-app.get('/main.css', (request, response) => {
-  response.sendFile('main.css', {
-    root: __dirname,
-  });
-});
-*/

@@ -2,13 +2,15 @@ require('dotenv').config();
 
 const path = require('path');
 const app = require('fastify')({logger: true});
+const minifier = require('html-minifier');
+
 const port = process.env.PORT || 3000;
 
+app.register(require('fastify-compress'));
 app.register(require('fastify-static'), {
   root: path.join(__dirname, '/../../', 'build'),
   prefix: '/',
 });
-
 app.register(require('point-of-view'), {
   engine: {'art-template': require('art-template')},
   root: path.join(__dirname, 'components'),
@@ -16,7 +18,14 @@ app.register(require('point-of-view'), {
   defaultContext: {
     dev: process.env.NODE_ENV === 'development'
   },
-  options: {}
+  options: {
+    useHtmlMinifier: minifier,
+    htmlMinifierOptions: {
+      removeComments: true,
+      collapseWhitespace: true,
+      conservativeCollapse: true
+    }
+  }
 });
 
 app.register(require('./routes'));

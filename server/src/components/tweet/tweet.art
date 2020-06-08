@@ -2,10 +2,10 @@
 <div class="js-gridItem">
 	<div class="tweet">
 		<a class="tweet__header" href="{{$value.user_profile_url}}" target="_blank">
-			<img class="tweet__avatar" src="{{$value.user_avatar}}" alt="${i.user_screen_name}'s Avatar"/>
+			<img class="tweet__avatar" src="{{$value.user_avatar}}" alt="{{$value.user_screen_name}}'s Avatar"/>
 			<div class="tweet__user">
 				<span class="tweet__username">{{$value.user_name}}</span>
-				<small class="tweet__screenname">@${{$value.user_screen_name}}</small>
+				<small class="tweet__screenname">@{{$value.user_screen_name}}</small>
 			</div>
 		</a>
 		<a class="tweet__body" href="{{$value.tweet_url}}" target="_blank">

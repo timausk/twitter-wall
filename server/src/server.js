@@ -6,6 +6,7 @@ const minifier = require('html-minifier');
 
 const port = process.env.PORT || 3000;
 
+app.register(require('fastify-websocket'));
 app.register(require('fastify-compress'));
 app.register(require('fastify-static'), {
   root: path.join(__dirname, '/../../', 'build'),

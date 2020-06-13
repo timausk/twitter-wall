@@ -17,6 +17,7 @@ let Twitter = new twit({
 
 const filterTweets = (tweets) => {
   return tweets.map(tweet => ({
+    id: tweet.id_str,
     created_at: formatDate(tweet.created_at),
     user_name: tweet.user.name,
     user_screen_name: tweet.user.screen_name,
@@ -53,9 +54,9 @@ const buildTweetUrl = (screenName, statusId) => {
   return `${twitterUrl}/${screenName}/status/${statusId}`;
 };
 
-const searchTweets = async (query = 'porter stout', maxResults = 100) => {
+const searchTweets = async (query = 'porter stout', maxResults = 100, sinceId) => {
   const url = 'search/tweets';
-  const params = {q: `${query}`, count: maxResults};
+  const params = {q: `${query}`, count: maxResults, since_id: sinceId};
   const result = await Twitter.get(url, params);
   return filterTweets(result.data.statuses);
 };

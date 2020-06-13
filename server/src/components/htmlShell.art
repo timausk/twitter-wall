@@ -11,7 +11,7 @@
 <div class="page">
 	<header><h1>#{{headline}}</h1></header>
 	<main>
-		<div id="js-grid" class="grid">
+		<div id="js-grid" class="grid" data-since="{{sinceId}}">
 		{{if tweets}}
 			{{include './tweet/tweet.art'}}
 		{{else if error}}

@@ -1,4 +1,4 @@
-import {html} from 'lighterhtml';
+import {html} from 'uhtml';
 
 const insertTweets = (container, newTweets) => {
   container.insertBefore(html.node`
@@ -6,7 +6,7 @@ const insertTweets = (container, newTweets) => {
       <div class="js-gridItem">
         <div class="tweet">
           <a class="tweet__header" href="${tweet.tweet_profile_url}" target="_blank">
-            <img class="tweet__avatar" src="${tweet.user_avatar}" alt="${tweet.user_screen_name}'s Avatar"/>
+            <img class="tweet__avatar" src="${tweet.user_avatar}" alt="${tweet.user_avatar_alt}"/>
             <div class="tweet__user">
               <span class="tweet__username">${tweet.user_name}</span>
               <small class="tweet__screenname">@${tweet.user_screen_name}</small>

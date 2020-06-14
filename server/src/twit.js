@@ -25,6 +25,7 @@ const filterTweets = (tweets) => {
     user_avatar: process.env.avatar_size
       ? getAlternativeAvatarSize(tweet.user.profile_image_url_https, process.env.avatar_size)
       : tweet.user.profile_image_url_https,
+    user_avatar_alt: 'Avatar for ' + tweet.user.screen_name,
     tweet_text: tweet.text,
     tweet_url: buildTweetUrl(tweet.user.screen_name, tweet.id_str),
     tweet_retweeted_status_text: tweet.retweeted_status

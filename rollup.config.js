@@ -10,14 +10,14 @@ const postCss = {
 };
 
 export default {
-  input: 'client/src/main.js',
+  input: 'client/main.js',
   output: {
     file: `build/${outputFilename}`,
     format: 'es'
   },
   plugins: [
     resolve(),
-    terser(),
+    buildProduction ? terser() : {},
     postcss({
       extract: postCss.extract,
       modules: false,

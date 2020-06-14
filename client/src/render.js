@@ -1,7 +1,8 @@
-import {html} from 'uhtml';
+import { html } from 'uhtml';
+import { grid, alignGridItems } from './grid.js';
 
-const insertTweets = (container, newTweets) => {
-  container.insertBefore(html.node`
+const insertTweets = (newTweets) => {
+  grid.insertBefore(html.node`
     ${newTweets.map(tweet => html.node`
       <div class="js-gridItem">
         <div class="tweet">
@@ -24,14 +25,13 @@ const insertTweets = (container, newTweets) => {
         </div>
       </div>
     `)}
-  `, container.firstChild);
+  `, grid.firstChild);
 };
 
 export default Object.assign({
   init: (data) => {
     let newTweets = JSON.parse(data);
-    const container = document.getElementById('js-grid');
-    insertTweets(container, newTweets);
-    window.dispatchEvent(new Event('resize'));
+    insertTweets(newTweets);
+    alignGridItems();
   },
 });

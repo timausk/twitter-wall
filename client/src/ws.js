@@ -1,9 +1,10 @@
 import render from './render';
+import { grid } from './grid.js';
 
 const ws = new WebSocket('ws://localhost:3000/ws');
 
 const getLatestTweetId = () => {
-  return document.getElementById('js-grid').dataset.since;
+  return grid.dataset.since;
 };
 
 ws.onmessage = (message) => {

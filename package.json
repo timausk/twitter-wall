@@ -15,7 +15,7 @@
   "dependencies": {
     "art-template": "^4.13.2",
     "dotenv": "^8.2.0",
-    "fastify": "^3.0.0-rc.3",
+    "fastify": "^3.0.0-rc.5",
     "fastify-compress": "^3.1.0",
     "fastify-plugin": "^1.6.1",
     "fastify-static": "^3.0.0",
